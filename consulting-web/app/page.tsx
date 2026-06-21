@@ -23,6 +23,21 @@ const pillars = [
   ],
 ];
 
+const partners = [
+  "CP Group",
+  "SCG",
+  "PTT Group",
+  "Central Group",
+  "Bangkok Bank",
+  "AIA Thailand",
+  "Grab",
+  "Lazada",
+  "Sea Group",
+  "Shopee",
+  "DBS",
+  "UOB",
+];
+
 const services = [
   {
     title: "Corporate Liability Review",
@@ -92,6 +107,35 @@ export default function Home() {
               sizes="(max-width: 900px) 100vw, 50vw"
               priority
             />
+            <div
+              className="hero-risk-piece"
+              aria-hidden="true"
+              style={{ height: "min(64%, 560px)", top: "18%", width: "min(58%, 560px)" }}
+            >
+              <Image
+                className="hero-risk-piece-image"
+                src="/brand/hero-risk-piece.png"
+                alt=""
+                width={760}
+                height={1120}
+                priority
+                style={{ height: "100%", transform: "scaleX(1.24) scaleY(0.88)", width: "100%" }}
+              />
+            </div>
+          </div>
+          <div className="partner-strip" aria-label="Regional partner companies">
+          <div className="partner-strip-copy">
+            <span>Regional Partner Network</span>
+          </div>
+          <div className="partner-marquee" aria-hidden="true">
+            <div className="partner-track">
+              {[...partners, ...partners].map((partner, index) => (
+                <span className="partner-chip" key={`${partner}-${index}`}>
+                  {partner}
+                </span>
+              ))}
+            </div>
+          </div>
           </div>
         </section>
 
