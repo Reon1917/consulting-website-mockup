@@ -124,18 +124,18 @@ export default function Home() {
             </div>
           </div>
           <div className="partner-strip" aria-label="Regional partner companies">
-          <div className="partner-strip-copy">
-            <span>Regional Partner Network</span>
-          </div>
-          <div className="partner-marquee" aria-hidden="true">
-            <div className="partner-track">
-              {[...partners, ...partners].map((partner, index) => (
-                <span className="partner-chip" key={`${partner}-${index}`}>
-                  {partner}
-                </span>
-              ))}
+            <div className="partner-strip-copy">
+              <span>Regional Partner Network</span>
             </div>
-          </div>
+            <div className="partner-marquee" aria-hidden="true">
+              <div className="partner-track">
+                {[...partners, ...partners].map((partner, index) => (
+                  <span className="partner-chip" key={`${partner}-${index}`}>
+                    {partner}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
