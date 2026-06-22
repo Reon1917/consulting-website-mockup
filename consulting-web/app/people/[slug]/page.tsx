@@ -36,7 +36,7 @@ export default async function PartnerDetailPage({
             <p className="profile-role">{person.role}</p>
             <p>{person.summary}</p>
             <Link className="button button-primary" href="/contact">
-              Contact {person.name.split(" ")[0]}&apos;s Advisory Team
+              Contact Advisory Team
             </Link>
           </div>
         </section>

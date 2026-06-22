@@ -27,6 +27,7 @@
 }
 
 html {
+  overflow-x: clip;
   scroll-behavior: smooth;
 }
 
@@ -59,11 +60,19 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x: clip;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
 }
 
 button,
@@ -193,7 +202,9 @@ textarea {
   min-height: 48px;
   padding: 0 20px;
   border-radius: 12px;
+  max-width: 100%;
   text-transform: uppercase;
+  white-space: nowrap;
   transition:
     background 180ms ease,
     border-color 180ms ease,
@@ -263,6 +274,13 @@ h2,
 h3,
 p {
   margin: 0;
+  min-width: 0;
+}
+
+h1,
+h2,
+h3 {
+  overflow-wrap: anywhere;
 }
 
 .page-hero h1,
@@ -463,7 +481,7 @@ p {
   border-radius: 0;
   display: grid;
   gap: 20px;
-  padding: clamp(28px, 4vw, 46px) 0;
+  padding: clamp(28px, 4vw, 46px) clamp(22px, 3vw, 36px);
 }
 
 .copy-block p,
@@ -958,6 +976,10 @@ p {
   padding: clamp(72px, 9vw, 124px) clamp(20px, 5vw, 72px);
 }
 
+.profile-hero > * {
+  min-width: 0;
+}
+
 .profile-hero .portrait-large {
   max-height: 620px;
 }
@@ -1046,9 +1068,9 @@ textarea:focus {
 
 fieldset {
   border: 1px solid var(--line);
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
   gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   margin: 0;
   padding: 18px;
 }
@@ -1058,6 +1080,7 @@ fieldset {
   border: 1px solid var(--line);
   display: flex;
   gap: 8px;
+  min-width: 0;
   padding: 10px 12px;
   text-transform: none;
 }
@@ -1165,7 +1188,21 @@ fieldset {
 
 .footer-bottom div {
   display: flex;
+  flex-wrap: wrap;
   gap: 18px;
+}
+
+@media (max-width: 900px) {
+  .detail-grid,
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form,
+  .office-card,
+  .detail-panel {
+    border-radius: 14px;
+  }
 }
 
 @media (max-width: 1100px) {
@@ -1227,15 +1264,35 @@ fieldset {
 @media (max-width: 720px) {
   .site-header {
     gap: 14px;
+    grid-template-columns: 1fr;
     min-height: auto;
+  }
+
+  .brand-link {
+    justify-self: start;
+    min-width: 0;
   }
 
   .brand-link span {
     font-size: 0.76rem;
+    overflow-wrap: normal;
+  }
+
+  .main-nav {
+    grid-column: auto;
+    margin-inline: -2px;
+    scrollbar-width: none;
+  }
+
+  .main-nav::-webkit-scrollbar {
+    display: none;
   }
 
   .nav-cta {
+    justify-self: stretch;
+    min-height: 46px;
     padding-inline: 14px;
+    width: 100%;
   }
 
   .hero-copy h1,
@@ -1254,7 +1311,7 @@ fieldset {
   }
 
   .hero-copy {
-    padding-top: 48px;
+    padding: 48px clamp(18px, 6vw, 28px) 40px;
   }
 
   .hero-copy p {
@@ -1262,6 +1319,7 @@ fieldset {
   }
 
   .hero-copy .button {
+    font-size: clamp(0.78rem, 3.45vw, 0.9rem);
     min-height: 54px;
     width: 100%;
   }
@@ -1316,6 +1374,107 @@ fieldset {
   .footer-bottom div {
     align-items: flex-start;
     flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-header {
+    padding-inline: 16px;
+  }
+
+  .section,
+  .page-hero,
+  .profile-hero,
+  .office-section,
+  .site-footer {
+    padding-inline: 18px;
+  }
+
+  .main-nav {
+    display: grid;
+    gap: 5px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    overflow: visible;
+  }
+
+  .main-nav a {
+    font-size: 0.82rem;
+    justify-content: center;
+    padding-inline: 8px;
+    text-align: center;
+  }
+
+  .hero-copy h1,
+  .page-hero h1,
+  .profile-hero h1 {
+    line-height: 0.98;
+  }
+
+  .action-row {
+    gap: 10px;
+  }
+
+  .section-heading {
+    margin-bottom: 34px;
+  }
+
+  .section-heading h2,
+  .office-section h2 {
+    font-size: clamp(1.85rem, 10vw, 2.65rem);
+    line-height: 1.04;
+  }
+
+  .copy-block,
+  .pillar-card,
+  .service-card,
+  .profile-card,
+  .detail-panel,
+  .contact-form,
+  .office-card {
+    padding: 22px;
+  }
+
+  .copy-block {
+    padding-inline: 20px;
+  }
+
+  .signal-panel {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+
+  .signal-panel strong,
+  .signal-panel span {
+    min-height: 92px;
+  }
+
+  .partner-chip {
+    font-size: 0.7rem;
+    min-width: 108px;
+    padding-inline: 12px;
+  }
+
+  .portrait {
+    max-width: 320px;
+  }
+
+  .profile-hero .portrait-large {
+    justify-self: center;
+  }
+
+  .profile-hero .button {
+    font-size: clamp(0.76rem, 3.1vw, 0.86rem);
+    width: 100%;
+  }
+
+  .office-section .button {
+    font-size: clamp(0.78rem, 3.25vw, 0.88rem);
+    justify-self: stretch;
+    width: 100%;
+  }
+
+  .map-panel {
+    min-height: 220px;
   }
 }
 
